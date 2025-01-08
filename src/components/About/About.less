@@ -1,0 +1,32 @@
+.introBox {
+    display: flex;
+    @media screen and (max-width: 900px) {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    .left_section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .right_section {
+        display: flex;
+        align-items: center;
+        img {
+            max-height: 450px;
+            @media screen and (max-width: 600px) {
+                max-height: 250px;
+            }
+        }
+    }
+    .flex_box_wrapper {
+        display: flex;
+        .flex_box {
+            padding: 1rem;
+            border: 1px solid #999;
+            border-radius: 10px;
+            width: 50%;
+            margin: 1rem;
+        }
+    }
+}

@@ -1,0 +1,27 @@
+name: Deployment using SCP
+on: [push]
+jobs:
+
+  deploying:
+    strategy:
+      matrix:
+        node-version: [14.x]
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: install dependencies and build
+      run: |
+        export NODE_OPTIONS=--openssl-legacy-provider
+        yarn
+        yarn run build
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@v0.1.4
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        source: "dist/"
+        rm: true
+        target: /var/www/html/
